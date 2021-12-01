@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { useGetCryptosQuery } from '../../Services/cryptoApi';
 import { CryptoCurrencies, News } from '..';
+import Spinner from '../spinner';
 
 const {Title} = Typography;
 
@@ -15,7 +16,7 @@ const HomePage = () => {
   const globalStats = data?.data?.stats;
 
 
-  if(isfetching) return 'Loading...';
+  if(isfetching) return <Spinner/>
 
 
 

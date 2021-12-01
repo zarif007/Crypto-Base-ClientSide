@@ -3,6 +3,7 @@ import { Typography, Select, Row, Col, Avatar, Card } from 'antd';
 import moment from 'moment';
 import { useGetCryptoNewsQuery } from '../../Services/cryptoNewsApi';
 import { useGetCryptosQuery } from '../../Services/cryptoApi';
+import Spinner from '../spinner';
 
 
 const {Text, Title} = Typography;
@@ -18,7 +19,7 @@ const News = ({simplified}) => {
   
   const {data} = useGetCryptosQuery(100);
 
-  if(isFetching) return 'Loading....';
+  if(isFetching) return <Spinner/>
 
   return (
     <>

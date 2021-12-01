@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import {Card, Row, Col, Input} from 'antd'
 
 import { useGetCryptosQuery } from '../../Services/cryptoApi'
+import Spinner from '../spinner'
 
 
 const CryptoCurrencies = ({simplified}) => {
@@ -20,7 +21,7 @@ const CryptoCurrencies = ({simplified}) => {
     setCryptos(filteredData);
   }, [cryptosList, searchTerm])
 
-  if(isFetching) return 'loading....';
+  if(isFetching) return <Spinner/>
 
 
   return (
