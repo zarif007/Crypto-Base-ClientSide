@@ -1,14 +1,16 @@
 import React from 'react'
-import {Spin, Space} from 'antd'
+import {Spin, Space, Skeleton} from 'antd'
 
 const Spinner = () => {
   return (
     <>
-    <Space size="middle">
-        <Spin size="small" />
-        <Spin />
-        <Spin size="large" />
-    </Space>
+      <Skeleton active />
+      <Skeleton active />
+      <Skeleton active />
+      <Skeleton active />
+      <Skeleton active />
+      <Skeleton active />
+      <Skeleton active />
     </>
   )
 }

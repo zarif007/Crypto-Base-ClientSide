@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
-import { Col, Row, Typography, Select, Statistic } from 'antd';
+import { Col, Row, Typography, Select, Statistic, Avatar } from 'antd';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
 
 import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../../Services/cryptoApi';
@@ -25,6 +25,8 @@ const CryptoDetails = () => {
 
 
   const cryptoDetails = data?.data?.coin;
+
+  console.log('dt', cryptoDetails);
 
   if(isFetching) return <Spinner/>
 
@@ -50,6 +52,7 @@ const CryptoDetails = () => {
   return (
     <Col className="coin-detail-container">
       <Col className="coin-heading-container">
+      <Avatar src={cryptoDetails.iconUrl} size={100}/>
         <Title level={2} className="coin-name">
           {cryptoDetails.name} ({cryptoDetails.slug}) Price:
         </Title>
@@ -83,6 +86,28 @@ const CryptoDetails = () => {
           </Col>
           {
             stats.map(({icon, title, value}) => (
+              <Col className="coin-stats">
+                <Col className="coin-stats-name">
+                  <Text>{icon}</Text>
+                  <Text>{title}</Text>
+                </Col>
+                <Text className="stats">{value}</Text>
+              </Col>
+            ))
+          }
+        </Col>
+
+        <Col className="other-stats-info">
+          <Col className="coin-value-statistics-heading">
+            <Title level={3} className="coin-details-heading">
+              Other Coins value Statistic
+            </Title>
+            <p>
+              An overview of All Coins
+            </p>
+          </Col>
+          {
+            genericStats.map(({icon, title, value}) => (
               <Col className="coin-stats">
                 <Col className="coin-stats-name">
                   <Text>{icon}</Text>
