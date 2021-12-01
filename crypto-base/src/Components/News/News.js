@@ -20,8 +20,6 @@ const News = ({simplified}) => {
 
   if(isFetching) return 'Loading....';
 
-  console.log(cryptoNews);
-
   return (
     <>
       <Row gutter={[24, 24]}>
@@ -61,7 +59,7 @@ const News = ({simplified}) => {
                   </p>
                   <div className="provider-container">
                     <div>
-                      <Avatar src={news?.image?.thumbnail?.contentUrl || demoImg} />
+                      <Avatar src={news?.provider[0]?.image?.thumbnail?.contentUrl || demoImg} />
                       <Text className="provider-name">{news.provider[0]?.name}</Text>
                     </div>
                     <Text>{moment(news.datePublished).startOf('ss').fromNow()}</Text>
