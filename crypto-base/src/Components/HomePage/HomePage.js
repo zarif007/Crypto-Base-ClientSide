@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useGetCryptosQuery } from '../../Services/cryptoApi';
 import { CryptoCurrencies, News } from '..';
 import Spinner from '../spinner';
+import Checkchart from '../CryptoDetails/Checkchart';
 
 const {Title} = Typography;
 
@@ -22,6 +23,7 @@ const HomePage = () => {
 
   return (
     <>
+      
       <Title level={2} className='heading'>Global Crypto Stats</Title>
       <Row>
         <Col span={12}><Statistic title='Total CryptoCurrencies' value={globalStats?.total}></Statistic></Col>
@@ -35,6 +37,7 @@ const HomePage = () => {
         <Title level={3} className="show-more"><Link to="/cryptocurrencies">Show More</Link></Title>
       </div>
       <CryptoCurrencies simplified/>
+      {/* <Checkchart></Checkchart> */}
 
       <div className="home-heading-container">
         <Title level={2} className="home-title">Top 10 latest Crypto News</Title>
