@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
-import { Col, Row, Typography, Select, Statistic, Avatar } from 'antd';
+import { Col, Row, Typography, Select, Statistic, Avatar, Card } from 'antd';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
 
 import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../../Services/cryptoApi';
@@ -37,7 +37,7 @@ const CryptoDetails = () => {
     { title: 'Rank', value: cryptoDetails.rank, icon: <NumberOutlined /> },
     { title: '24h Volume', value: `$ ${cryptoDetails.volume && millify(cryptoDetails.volume)}`, icon: <ThunderboltOutlined /> },
     { title: 'Market Cap', value: `$ ${cryptoDetails.marketCap && millify(cryptoDetails.marketCap)}`, icon: <DollarCircleOutlined /> },
-    { title: 'All-time-high(daily avg.)', value: `$ ${millify(cryptoDetails.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
+    { title: 'All-time-high', value: `$ ${millify(cryptoDetails.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
   ];
 
   const genericStats = [
@@ -75,95 +75,105 @@ const CryptoDetails = () => {
       <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} />
 
       <Col className="stats-container">
-        <Col className="coin-value-statistics">
-          <Col className="coin-value-statistics-heading">
-            <Title level={3} className="coin-details-heading">
-              {cryptoDetails.name} value Statistic
-            </Title>
-            <p>
-              An overview of {cryptoDetails.name}
-            </p>
-          </Col>
-          {
-            stats.map(({icon, title, value}) => (
-              <Col className="coin-stats">
-                <Col className="coin-stats-name">
-                  <Text>{icon}</Text>
-                  <Text>{title}</Text>
+        <Card style={{marginTop: '50px'}}>
+          <Col className="coin-value-statistics">
+            <Col className="coin-value-statistics-heading">
+              <Title level={3} className="coin-details-heading">
+                {cryptoDetails.name} value Statistic
+              </Title>
+              <p>
+                An overview of {cryptoDetails.name}
+              </p>
+            </Col>
+            {
+              stats.map(({icon, title, value}) => (
+                <Col className="coin-stats">
+                  <Col className="coin-stats-name">
+                    <Text>{icon}</Text>
+                    <Text>{title}</Text>
+                  </Col>
+                  <Text className="stats">{value}</Text>
                 </Col>
-                <Text className="stats">{value}</Text>
-              </Col>
-            ))
-          }
+              ))
+            }
+          </Col>
+        </Card>
+
+        <Col className="other-stats-info">
+          <Card style={{marginTop: '50px'}}>
+            <Col className="coin-value-statistics-heading">
+              <Title level={3} className="coin-details-heading">
+                Other Coins value Statistic
+              </Title>
+              <p>
+                An overview of All Coins
+              </p>
+            </Col>
+            {
+              genericStats.map(({icon, title, value}) => (
+                <Col className="coin-stats">
+                  <Col className="coin-stats-name">
+                    <Text>{icon}</Text>
+                    <Text>{title}</Text>
+                  </Col>
+                  <Text className="stats">{value}</Text>
+                </Col>
+              ))
+            }
+          </Card>
         </Col>
 
         <Col className="other-stats-info">
-          <Col className="coin-value-statistics-heading">
-            <Title level={3} className="coin-details-heading">
-              Other Coins value Statistic
-            </Title>
-            <p>
-              An overview of All Coins
-            </p>
-          </Col>
-          {
-            genericStats.map(({icon, title, value}) => (
-              <Col className="coin-stats">
-                <Col className="coin-stats-name">
-                  <Text>{icon}</Text>
-                  <Text>{title}</Text>
+          <Card style={{marginTop: '50px'}}>
+            <Col className="coin-value-statistics-heading">
+              <Title level={3} className="coin-details-heading">
+                Other Coins value Statistic
+              </Title>
+              <p>
+                An overview of All Coins
+              </p>
+            </Col>
+            {
+              genericStats.map(({icon, title, value}) => (
+                <Col className="coin-stats">
+                  <Col className="coin-stats-name">
+                    <Text>{icon}</Text>
+                    <Text>{title}</Text>
+                  </Col>
+                  <Text className="stats">{value}</Text>
                 </Col>
-                <Text className="stats">{value}</Text>
-              </Col>
-            ))
-          }
-        </Col>
-
-        <Col className="other-stats-info">
-          <Col className="coin-value-statistics-heading">
-            <Title level={3} className="coin-details-heading">
-              Other Coins value Statistic
-            </Title>
-            <p>
-              An overview of All Coins
-            </p>
-          </Col>
-          {
-            genericStats.map(({icon, title, value}) => (
-              <Col className="coin-stats">
-                <Col className="coin-stats-name">
-                  <Text>{icon}</Text>
-                  <Text>{title}</Text>
-                </Col>
-                <Text className="stats">{value}</Text>
-              </Col>
-            ))
-          }
+              ))
+            }
+          </Card>
         </Col>
       </Col>
       <Col className="coin-desc-link">
           <Row className="coin-desc">
-            <Title level={3} className="coin-details-heading">
-              What is {cryptoDetails.name}
-              {HTMLReactParser(cryptoDetails.description)}
-            </Title>
+            <Card style={{marginTop: '50px'}}>
+              <Title level={3} className="coin-details-heading">
+                What is {cryptoDetails.name}
+                {HTMLReactParser(cryptoDetails.description)}
+              </Title>
+            </Card>
           </Row>
           <Col className="coin-links">
-            <Title level={3} className="coin-details-heading">
-              {cryptoDetails.name} Links
-            </Title>
-            {
-              cryptoDetails.links.map(link => (
-                <Row className="coin-link" key={link.name}>
-                  <Title level={5} className="link-name">
-                    {link.type}
-                  </Title>
-                  <a href={link.url} target="_blank" rel="noreferrer">
-                    {link.name}
-                  </a>
-                </Row>
-              ))
-            }
+            <Card style={{marginTop: '50px'}}>
+              <Title level={3} className="coin-details-heading">
+                {cryptoDetails.name} Links
+              </Title>
+              {
+                cryptoDetails.links.map(link => (
+                  <Row className="coin-link" key={link.name}>
+                    <Title level={5} className="link-name">
+                      {link.type}
+                    </Title>
+                    <a href={link.url} target="_blank" rel="noreferrer">
+                      {link.name}
+                    </a>
+                  </Row>
+                ))
+              }
+            </Card>
           </Col>
       </Col>
     </Col>
