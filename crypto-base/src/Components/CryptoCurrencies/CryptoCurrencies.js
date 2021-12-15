@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import millify from 'millify'
 import { Link } from 'react-router-dom'
-import {Card, Row, Col, Input, Avatar, Typography, Collapse, Table, Button} from 'antd'
+import {Card, Input, Avatar, Table, Button, Row, Col} from 'antd'
 
 import { useGetCryptosQuery } from '../../Services/cryptoApi'
 import Spinner from '../spinner'
-import HTMLReactParser from 'html-react-parser'
 
-const { Text } = Typography;
-const { Panel } = Collapse;
 
 const CryptoCurrencies = ({simplified}) => {
   const count = simplified ? 10 : 100;
@@ -17,11 +14,8 @@ const CryptoCurrencies = ({simplified}) => {
   const [cryptos, setCryptos] = useState(cryptosList?.data?.coins);
   const [searchTerm, SetSearchTerm] = useState('');
 
-  
 
-  
-
-  const columns = [
+  let columns = [
     {
       title: 'Logo',
       dataIndex: 'iconUrl',
@@ -45,6 +39,17 @@ const CryptoCurrencies = ({simplified}) => {
       }
     },
     {
+      title: 'Change',
+      dataIndex: 'change',
+      key: 'key',
+      render: change => {
+        return (
+          change >= 0 ? <div style={{color: 'green'}}><b>+{millify(change)} USD</b></div> :
+          <div style={{color: 'red'}}><b>{millify(change)} USD</b></div>
+        )
+      }
+    },
+    {
       title: 'Details',
       dataIndex: 'id',
       key: 'key',
@@ -54,6 +59,7 @@ const CryptoCurrencies = ({simplified}) => {
     },
   ]
 
+ 
   useEffect(() => {
 
     const filteredData = cryptosList?.data?.coins.filter(coin => coin.name.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
@@ -75,27 +81,6 @@ const CryptoCurrencies = ({simplified}) => {
         )
       }
       
-      {/* <Row gutter={[32, 32]} className="crypto-card-container">
-        {
-          cryptos?.map((crypto) => (
-            <Col xs={24} sm={12} lg={6} className="crypto-card" key={crypto.id}>
-              <Link to={`/crypto/${crypto.id}`}>
-                <Card 
-                  title={`${crypto.rank}. ${crypto.name}`}
-                  extra={<img src={crypto.iconUrl} className="crypto-image"/>}
-                  hoverable
-                >
-                  <p>Price: {millify(crypto.price)}</p>
-                  <p>market Cap: {millify(crypto.marketCap)}</p>
-                  <p>Daily Change: {millify(crypto.change)}</p>
-
-                </Card>
-              </Link>
-            </Col>
-          ))
-        }
-      </Row> */}
-
       <Table 
         dataSource={cryptos}
         columns={columns}

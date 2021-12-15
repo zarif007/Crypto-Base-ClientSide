@@ -22,7 +22,7 @@ const News = ({simplified}) => {
   if(isFetching) return <Spinner/>
 
   return (
-    <>
+    <Card>
       <Row gutter={[24, 24]}>
         {
           !simplified && (
@@ -45,7 +45,7 @@ const News = ({simplified}) => {
         }
         {
           cryptoNews?.value.map((news, i) => (
-            <Col xs={24} sm={12} lg={8} key={i}>
+            <Col xs={24} sm={12} lg={12} key={i}>
               <Card hoverable className="news-card">
                 <a href={news.url} target="_blank" rel="noreferrer">
                   <div className="news-image-container">
@@ -71,7 +71,7 @@ const News = ({simplified}) => {
           ))
         }
       </Row>
-    </>
+    </Card>
   )
 }
 
