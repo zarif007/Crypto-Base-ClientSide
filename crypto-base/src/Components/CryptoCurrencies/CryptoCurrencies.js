@@ -81,12 +81,13 @@ const CryptoCurrencies = ({simplified}) => {
         )
       }
       
-      <Table 
-        dataSource={cryptos}
-        columns={columns}
-        pagination={{defaultPageSize: 100}}
-      ></Table>
-
+      <div>
+        <Table 
+          dataSource={cryptos}
+          columns={columns}
+          pagination={{defaultPageSize: 100}}
+        ></Table>
+      </div>
       
     </>
   )
