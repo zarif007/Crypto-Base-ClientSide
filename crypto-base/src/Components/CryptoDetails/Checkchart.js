@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from '@ant-design/charts';
+import { Doughnut } from 'react-chartjs-2';
 
 const Checkchart = () => {
   const [data, setData] = useState([]);

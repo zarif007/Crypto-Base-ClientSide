@@ -1,11 +1,12 @@
 :root{
   --text-primary:#000;
-  --bgPrimary:#fff;
- --bgSecondary: #F9F9F9;
- --pink: #0071bd;
- --light-blue: #e6f7ff;
- --border: #d9d9d9;
+  --bgPrimary:rgb(255, 255, 255);
+ --bgSecondary: #ffffff;
+ --pink: black;
+ --light-blue: #ffffff;
+ --border: #ffffff;
 }
+
 
 * {
   margin: 0;
@@ -321,10 +322,10 @@ width: 70%;
   display: flex;
   justify-content: space-between;
   gap: 50px;
-  color: #0071bd;
+  color: black;
 }
 .chart-title{
-  color: #0071bd !important;
+  color: black !important;
 }
 .price-container{
   display: flex !important;
