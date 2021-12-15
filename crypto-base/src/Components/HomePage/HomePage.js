@@ -26,7 +26,7 @@ const HomePage = () => {
 
       <div className="site-card-wrapper" style={{textAlign: 'center'}}>
         <Row gutter={16}>
-          <Col span={6}>
+          <Col xs={24} sm={12} lg={6}>
             <Card title="Total CryptoCurrencies" bordered={true}>
               <Title level={2}>
                 <CountUp
@@ -37,7 +37,7 @@ const HomePage = () => {
               </Title>
             </Card>
           </Col>
-          <Col span={6}>
+          <Col xs={24} sm={12} lg={6}>
             <Card title="Total Exchanges" bordered={true}>
               <Title level={2}>
                 <CountUp
@@ -48,7 +48,7 @@ const HomePage = () => {
               </Title>
             </Card>
           </Col>
-          <Col span={6}>
+          <Col xs={24} sm={12} lg={6}>
             <Card title="Total Market Cap (USD)" bordered={true}>
               <Title level={2}>
                 <CountUp
@@ -59,7 +59,7 @@ const HomePage = () => {
               </Title>
             </Card>
           </Col>
-          <Col span={6}>
+          <Col xs={24} sm={12} lg={6}>
             <Card title="Total 24H Volume (USD)" bordered={true}>
               <Title level={2}>
                 <CountUp

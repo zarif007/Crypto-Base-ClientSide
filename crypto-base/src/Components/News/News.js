@@ -22,7 +22,6 @@ const News = ({simplified}) => {
   if(isFetching) return <Spinner/>
 
   return (
-    <Card>
       <Row gutter={[24, 24]}>
         {
           !simplified && (
@@ -60,7 +59,7 @@ const News = ({simplified}) => {
                   </p>
                   <div className="provider-container">
                     <div>
-                      <Avatar src={news?.provider[0]?.image?.thumbnail?.contentUrl || demoImg} />
+                      <Avatar src={news?.provider[0]?.image?.thumbnail?.contentUrl || demoImg}/>
                       <Text className="provider-name">{news.provider[0]?.name}</Text>
                     </div>
                     <Text>{moment(news.datePublished).startOf('ss').fromNow()}</Text>
@@ -71,7 +70,6 @@ const News = ({simplified}) => {
           ))
         }
       </Row>
-    </Card>
   )
 }
 
