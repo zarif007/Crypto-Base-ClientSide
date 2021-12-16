@@ -201,6 +201,7 @@ a:hover{
 }
 
 .coin-heading-container{
+  font-family: 'Inter', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -212,11 +213,13 @@ a:hover{
 }
 
 .coin-heading-container .coin-name{
+  font-family: 'Inter', sans-serif;
   font-weight: 900;
   color: var(--pink);
 }
 
 .coin-heading-container p{
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
   opacity: 0.9;
   margin-bottom: 20px;
@@ -237,6 +240,7 @@ a:hover{
 }
 
 .coin-details-heading{
+  font-family: 'Inter', sans-serif;
   font-weight: 700 !important;
   margin-top: 20px !important;
   color: var(--pink) !important;
@@ -263,6 +267,7 @@ a:hover{
 }
 
 .coin-value-statistics-heading p{
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
   opacity: 0.9;
 }
@@ -403,6 +408,7 @@ width: 70%;
   font-weight: 900 !important;
 }
 .home-heading-container{
+  font-family: 'Inter', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -74,14 +74,14 @@ const HomePage = () => {
       </div>
 
       <div className="home-heading-container">
-        <Title level={2} className="home-title">Top 10 Crypto Currencies</Title>
+        <Title level={2} className="home-title">Top Crypto Currencies</Title>
         <Title level={3} className="show-more"><Link to="/cryptocurrencies">Show More</Link></Title>
       </div>
 
       <CryptoCurrencies simplified/>
 
       <div className="home-heading-container">
-        <Title level={2} className="home-title">Top 10 latest Crypto News</Title>
+        <Title level={2} className="home-title">Top latest Crypto Stories</Title>
         <Title level={3} className="show-more"><Link to="/news">Show More</Link></Title>
       </div>
 

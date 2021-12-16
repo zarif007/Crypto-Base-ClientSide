@@ -6,7 +6,6 @@ import { NavBar, HomePage, Exchanges, CryptoCurrencies, CryptoDetails, News } fr
 function App() {
   return (
     <div>
-      
       <div className="routes container">
         <Switch>
           <Route exact path='/'>
@@ -22,7 +21,7 @@ function App() {
             <CryptoDetails/>
           </Route>
           <Route exact path='/news'>
-            <News/> 
+            <News /> 
           </Route>
         </Switch>
       </div>

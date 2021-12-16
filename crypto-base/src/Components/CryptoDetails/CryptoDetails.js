@@ -7,6 +7,8 @@ import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCi
 
 import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../../Services/cryptoApi';
 
+import { News } from '..';
+
 import LineChart from './LineChart';
 import Spinner from '../spinner';
 
@@ -26,9 +28,10 @@ const CryptoDetails = () => {
 
   const cryptoDetails = data?.data?.coin;
 
-  console.log('dt', cryptoDetails);
 
   if(isFetching) return <Spinner/>
+
+  let cur = cryptoDetails.name;
 
   const time = ['24h', '7d', '30d', '1y', '5y'];
 
@@ -178,6 +181,13 @@ const CryptoDetails = () => {
             </Col>
         </Col>
       </Col>
+
+      <Card style={{marginTop: '50px'}}>
+        <Title level={3} className="coin-details-heading">
+          Top Stories of {cryptoDetails.name}
+        </Title>
+      </Card>
+      <News simplified cur={cur}/>
     </div>
   )
 }

@@ -11,9 +11,12 @@ const {Option} = Select;
 
 const demoImg = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
-const News = ({simplified}) => {
+const News = ({simplified, cur}) => {
 
-  const [newsCategory, setnewsCategory] = useState('Cryptocurrency');
+  if(!cur) 
+    cur = 'Cryptocurrency';
+
+  const [newsCategory, setnewsCategory] = useState(cur);
 
   const {data: cryptoNews, isFetching} = useGetCryptoNewsQuery({newsCategory, count: simplified ? 6: 12})
   
@@ -32,7 +35,7 @@ const News = ({simplified}) => {
                 placeholder="Select a Crypto specific news"
                 optionFilterProp="children"
                 onChange={value => setnewsCategory(value)}
-                filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase())}
+                // filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase())}
               >
                 <Option value="Cryptocurrency">Cryptocurrency</Option>
                 {
