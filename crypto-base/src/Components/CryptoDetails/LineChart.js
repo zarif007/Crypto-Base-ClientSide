@@ -7,7 +7,7 @@ import { Line } from 'react-chartjs-2';
 
 const { Title } = Typography;
 
-const LineChart = ({ coinHistory, currentPrice, coinName }) => {
+const LineChart = ({ coinHistory, currentPrice, coinName, coinColor }) => {
   const coinPrice = [];
   const coinTimestamp = [];
 
@@ -28,8 +28,8 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
         data: coinPrice,
         pointRadius: 1,
         fill: false,
-        backgroundColor: '#3237EF',
-        borderColor: '#3237EF',
+        backgroundColor: coinColor,
+        borderColor: coinColor,
       },
     ],
   };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
-import { Col, Row, Typography, Select, Statistic, Avatar, Card } from 'antd';
+import { Col, Row, Typography, Select, Avatar, Card, InputNumber, Button } from 'antd';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
 
 import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../../Services/cryptoApi';
@@ -25,9 +25,12 @@ const CryptoDetails = () => {
 
   const {data: coinHistory} = useGetCryptoHistoryQuery({coinId, timePeriod});
 
+  const [ammount, setAmmount] = useState(1);
+
 
   const cryptoDetails = data?.data?.coin;
 
+  console.log(cryptoDetails)
 
   if(isFetching) return <Spinner/>
 
@@ -76,7 +79,7 @@ const CryptoDetails = () => {
           }
         </Select>
 
-        <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} />
+        <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} coinColor={cryptoDetails.color}/>
 
         <Col className="stats-container">
           <Card style={{marginTop: '50px'}}>
@@ -131,23 +134,21 @@ const CryptoDetails = () => {
             <Card style={{marginTop: '50px'}}>
               <Col className="coin-value-statistics-heading">
                 <Title level={3} className="coin-details-heading">
-                  Other Coins value Statistic
+                  Purchase {cryptoDetails.name}
                 </Title>
                 <p>
-                  An overview of All Coins
+                  {ammount * cryptoDetails.price} USD
                 </p>
               </Col>
-              {
-                genericStats.map(({icon, title, value}) => (
-                  <Col className="coin-stats">
-                    <Col className="coin-stats-name">
-                      <Text>{icon}</Text>
-                      <Text>{title}</Text>
-                    </Col>
-                    <Text className="stats">{value}</Text>
-                  </Col>
-                ))
-              }
+              <InputNumber
+                  style={{ width: 300, height: 60, fontSize: 35 }}
+                  defaultValue="1"
+                  min="0"
+                  max="100"
+                  step="0.00001"
+                  onChange={value => setAmmount(value)}
+              /> {cryptoDetails.slug} <br/>
+              <Button type="primary" style={{marginTop: 20, height: 50, width: 100, fontSize: 20}}>Buy</Button>
             </Card>
           </Col>
         </Col>
@@ -167,7 +168,7 @@ const CryptoDetails = () => {
                 </Title>
                 {
                   cryptoDetails.links.map(link => (
-                    <Row className="coin-link" key={link.name}>
+                    <Row className="coin-link" key={link.url}>
                       <Title level={5} className="link-name">
                         {link.type}
                       </Title>

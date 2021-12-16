@@ -44,8 +44,8 @@ const CryptoCurrencies = ({simplified}) => {
       key: 'key',
       render: change => {
         return (
-          change >= 0 ? <div style={{color: 'green'}}><b>+{millify(change)} USD</b></div> :
-          <div style={{color: 'red'}}><b>{millify(change)} USD</b></div>
+          change >= 0 ? <div style={{color: 'green'}}><b>+{millify(change)} %</b></div> :
+          <div style={{color: 'red'}}><b>{millify(change)} %</b></div>
         )
       }
     },
