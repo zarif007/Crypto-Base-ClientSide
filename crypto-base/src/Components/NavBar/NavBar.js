@@ -1,65 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import {Button, Menu, Typography, Avatar} from 'antd';
-import {HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined} from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import React from 'react'
+
+import {
+    Nav,
+    NavLink,
+    Bars,
+    NavMenu,
+    NavBtn,
+    NavBtnLink
+  } from './NavbarElements';
+
 import icon from '../../Images/icon.png'
+import { Card } from 'antd';
+
 
 const Navbar = () => {
 
-  const [activeMenu, setActiveMenu] = useState(true);
-  const [screenSize, setScreenSize] = useState(null);
-
-  useEffect(() => {
-      const handleResize = () => setScreenSize(window.innerWidth);
-
-      window.addEventListener('resize', handleResize);
-
-      handleResize();
-
-      return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-
-    if(screenSize < 786){
-        setActiveMenu(false);
-    } else {
-        setActiveMenu(true);
-    }
-  }, [screenSize]);
-
-  return (
-    <div className="nav-container">
-        <div className="logo-container">
-            <Avatar src={icon} size='large'/>
-            <Typography.Title level={2} className="Logo">
-                <Link to='/'>CryptoBase</Link> 
-            </Typography.Title>
-            <Button className="menu-control-container" onClick={() => setActiveMenu(!activeMenu)}>
-                <MenuOutlined />
-            </Button>
-        </div>
-        {
-            activeMenu && (
-                <Menu theme="dark">
-                    <Menu.Item icon={<HomeOutlined />}>
-                        <Link to='/'>Home</Link>
-                    </Menu.Item>
-                    <Menu.Item icon={<FundOutlined />}>
-                        <Link to='/cryptocurrencies'>Crypto Currencies</Link>
-                    </Menu.Item>
-                    <Menu.Item icon={<MoneyCollectOutlined />}>
-                        <Link to='/exchanges'>Exchanges</Link>
-                    </Menu.Item>
-                    <Menu.Item icon={<BulbOutlined />}>
-                        <Link to='/news'>News</Link>
-                    </Menu.Item>
-                </Menu>
-            )
-        }
-        
-    </div>
-  )
+    return (
+        <>
+          <Nav>
+            <NavLink to='/'>
+              <img style={{height: 50}} src={icon} alt='logo' />
+            </NavLink>
+            <Bars />
+            <NavMenu>
+              <NavLink to='/cryptocurrencies' activeStyle>
+                Crypto Currencies
+              </NavLink>
+              <NavLink to='/services' activeStyle>
+                Services
+              </NavLink>
+              <NavLink to='/contact-us' activeStyle>
+                Contact Us
+              </NavLink>
+              <NavLink to='/sign-up' activeStyle>
+                Sign Up
+              </NavLink>
+              {/* Second Nav */}
+              {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+            </NavMenu>
+            <NavBtn>
+              <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+            </NavBtn>
+          </Nav>
+        </>
+      );
+    
 }
 
 export default Navbar

@@ -141,14 +141,14 @@ const CryptoDetails = () => {
                 </p>
               </Col>
               <InputNumber
-                  style={{ width: 300, height: 60, fontSize: 35 }}
+                  style={{ width: 300, height: 60, fontSize: 35, marginTop: 20, marginBottom: 20 }}
                   defaultValue="1"
                   min="0"
                   max="100"
                   step="0.00001"
                   onChange={value => setAmmount(value)}
-              /> {cryptoDetails.slug} <br/>
-              <Button type="primary" style={{marginTop: 20, height: 50, width: 100, fontSize: 20}}>Buy</Button>
+              />  <br/>
+              <Button type="primary" style={{marginTop: 20, height: 50, width: 300, fontSize: 20}}>BUY</Button>
             </Card>
           </Col>
         </Col>
