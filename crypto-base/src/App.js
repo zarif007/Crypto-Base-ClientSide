@@ -8,6 +8,8 @@ import {
 import './App.css';
 import { NavBar, HomePage, Exchanges, CryptoCurrencies, CryptoDetails, News } from './Components'
 import Navbar from './Components/NavBar/NavBar';
+import LogIn from './Components/Authentication/LogIn/LogIn';
+import Register from './Components/Authentication/Register/Register';
 
 
 function App() {
@@ -31,6 +33,12 @@ function App() {
             </Route>
             <Route exact path='/news'>
               <News /> 
+            </Route>
+            <Route exact path='/login'>
+              <LogIn/>
+            </Route>
+            <Route exact path='/register'>
+              <Register/>
             </Route>
           </Switch>
         </div>

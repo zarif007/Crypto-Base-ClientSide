@@ -7,6 +7,7 @@ import { useGetCryptosQuery } from '../../Services/cryptoApi'
 import Spinner from '../spinner'
 import { useSelector } from 'react-redux'
 import realCurrencyStats from '../../realCurrencyStats'
+import useFireBase from '../../customHooks/useFireBase'
 
 
 const CryptoCurrencies = ({simplified}) => {
@@ -19,6 +20,10 @@ const CryptoCurrencies = ({simplified}) => {
 
   const [cryptos, setCryptos] = useState(cryptosList?.data?.coins);
   const [searchTerm, SetSearchTerm] = useState('');
+
+  const { user } = useFireBase();
+
+  console.log('user', user)
 
 
   let columns = [
