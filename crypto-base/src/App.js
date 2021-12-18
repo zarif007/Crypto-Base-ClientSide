@@ -9,6 +9,7 @@ import './App.css';
 import { NavBar, HomePage, Exchanges, CryptoCurrencies, CryptoDetails, News } from './Components'
 import Navbar from './Components/NavBar/NavBar';
 
+
 function App() {
   return (
     <div style={{overflow: 'hidden'}}>
