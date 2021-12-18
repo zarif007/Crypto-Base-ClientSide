@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Col, Row, Typography } from 'antd';
 import Chart from 'chart.js/auto'
 import { Line } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
 
 
 
@@ -10,6 +11,10 @@ const { Title } = Typography;
 const LineChart = ({ coinHistory, currentPrice, coinName, coinColor }) => {
   const coinPrice = [];
   const coinTimestamp = [];
+
+  const realCurrency = useSelector(state => state.realCurrency.value);
+
+  console.log('realCurrency', realCurrency)
 
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
