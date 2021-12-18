@@ -1,12 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Input, Button, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import useFireBase from '../../../customHooks/useFireBase';
+import { useLocation, useHistory } from 'react-router-dom';
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
+    const [error, setError] = useState('');
+
+    const {signInWithGoogle, setIsLoading, setUser} = useFireBase();
+
+    const auth = getAuth();
+
+    const loaction = useLocation();
+    const history = useHistory();
+    const redirect_url = loaction.state?.from || '/';
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(res => {
+                setUser(res.user);
+                history.push(redirect_url);
+            })
+            .finally(() => setIsLoading(false))
+    };
+
     const onFinish = (values) => {
-        console.log(values)
+
+        if(values.password !== values.password2){
+            setError('Password did not match');
+            return;
+        }
+        
+        createUserWithEmailAndPassword(auth, values.email, values.password)
+            .then(res => {
+                updateProfile(auth.currentUser, {displayName: values.username})
+                    .then(res => {})
+                history.push('');
+            })
+            .catch((error) => {
+                setError(error.message);
+            });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -17,7 +53,7 @@ const Register = () => {
     return (
         <div style={{fontFamily: "'Inter', sans-serif"}}>
             <div className='center'>
-                <button class="google-btn" >
+                <button class="google-btn" onClick={handleGoogleSignIn}>
                     <div class="google-icon-wrapper">
                         <img class="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
                     </div>
@@ -90,6 +126,15 @@ const Register = () => {
                     ]}
                 >
                     <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Confirm Password"/>
+                </Form.Item>
+
+                <Form.Item
+                    wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                    }}
+                >
+                    <p style={{color: 'red'}}>{error}</p>
                 </Form.Item>
 
                 <Form.Item

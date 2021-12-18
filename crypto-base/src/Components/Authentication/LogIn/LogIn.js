@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Input, Button, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import useFireBase from './../../../customHooks/useFireBase';
 import { useLocation, useHistory } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 const LogIn = () => {
+
+    const [error, setError] = useState('');
+
+    const auth = getAuth();
 
     const {signInWithGoogle, setIsLoading, setUser} = useFireBase();
 
@@ -24,7 +29,15 @@ const LogIn = () => {
     };
 
     const onFinish = (values) => {
-        
+        signInWithEmailAndPassword(auth, values.email, values.password)
+            .then(res => { 
+                setUser(res.user);
+                history.push(redirect_url);
+            })
+            .catch((error) => {
+                setError(error.message);
+            })
+            .finally(() => setIsLoading(false));
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -81,6 +94,15 @@ const LogIn = () => {
                     ]}
                 >
                     <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password"/>
+                </Form.Item>
+
+                <Form.Item
+                    wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                    }}
+                >
+                    <p style={{color: 'red'}}>{error}</p>
                 </Form.Item>
 
                 <Form.Item
