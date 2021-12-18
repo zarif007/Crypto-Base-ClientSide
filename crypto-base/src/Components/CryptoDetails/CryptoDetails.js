@@ -11,6 +11,8 @@ import { News } from '..';
 
 import LineChart from './LineChart';
 import Spinner from '../spinner';
+import { useSelector } from 'react-redux';
+import realCurrencyStats from '../../realCurrencyStats';
 
 const {Title, Text} = Typography;
 const {Option} = Select;
@@ -30,7 +32,10 @@ const CryptoDetails = () => {
 
   const cryptoDetails = data?.data?.coin;
 
-  console.log(cryptoDetails)
+  const realCurrency = useSelector(state => state.realCurrency.value);
+
+  const inRealCurrency = realCurrencyStats[realCurrency][0];
+
 
   if(isFetching) return <Spinner/>
 
@@ -64,8 +69,8 @@ const CryptoDetails = () => {
             {cryptoDetails.name} ({cryptoDetails.slug}) Price:
           </Title>
           <p>
-            {cryptoDetails.name} Live price in USD 
-            view value Statistic, market cap and supply 
+            {cryptoDetails.name} Live price in {realCurrency}<span> </span>
+             view value Statistic, market cap and supply 
           </p>
         </Col>
         <Select 
@@ -79,7 +84,7 @@ const CryptoDetails = () => {
           }
         </Select>
 
-        <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} coinColor={cryptoDetails.color}/>
+        <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price * inRealCurrency)} coinName={cryptoDetails.name} coinColor={cryptoDetails.color}/>
 
         <Col className="stats-container">
           <Card style={{marginTop: '50px'}}>
@@ -137,7 +142,7 @@ const CryptoDetails = () => {
                   Purchase {cryptoDetails.name}
                 </Title>
                 <p>
-                  {ammount * cryptoDetails.price} USD
+                  {ammount * cryptoDetails.price * inRealCurrency} <span> </span> {realCurrency}
                 </p>
               </Col>
               <InputNumber

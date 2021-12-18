@@ -5,11 +5,17 @@ import {Card, Input, Avatar, Table, Button, Row, Col} from 'antd'
 
 import { useGetCryptosQuery } from '../../Services/cryptoApi'
 import Spinner from '../spinner'
+import { useSelector } from 'react-redux'
+import realCurrencyStats from '../../realCurrencyStats'
 
 
 const CryptoCurrencies = ({simplified}) => {
   const count = simplified ? 10 : 100;
   const {data: cryptosList, isFetching} = useGetCryptosQuery(count);
+
+  const realCurrency = useSelector(state => state.realCurrency.value);
+
+  const inRealCurrency = realCurrencyStats[realCurrency][0];
 
   const [cryptos, setCryptos] = useState(cryptosList?.data?.coins);
   const [searchTerm, SetSearchTerm] = useState('');
@@ -35,7 +41,7 @@ const CryptoCurrencies = ({simplified}) => {
       key: 'key',
       sorter: (a, b) => a.price - b.price,
       render: price => {
-        return <div><b>{millify(price)} USD</b></div>
+        return <div><b>{millify(price * inRealCurrency)} {realCurrency}</b></div>
       }
     },
     {

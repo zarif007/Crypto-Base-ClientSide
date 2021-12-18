@@ -7,17 +7,22 @@ import { useGetCryptosQuery } from '../../Services/cryptoApi';
 import { CryptoCurrencies, News } from '..';
 import Spinner from '../spinner';
 import CountUp from 'react-countup';
+import { useSelector } from 'react-redux';
+import realCurrencyStats from '../../realCurrencyStats';
 
 const {Title} = Typography;
 
 const HomePage = () => {
+
+  const realCurrency = useSelector(state => state.realCurrency.value);
+
+  const inRealCurrency = realCurrencyStats[realCurrency][0];
   
   const {data, isfetching} = useGetCryptosQuery(10);
 
   const globalStats = data?.data?.stats;
 
   if(isfetching) return <Spinner/>
-
 
   return (
     <>
@@ -49,22 +54,22 @@ const HomePage = () => {
             </Card>
           </Col>
           <Col xs={24} sm={12} lg={6}>
-            <Card title="Total Market Cap (USD)" bordered={true}>
+            <Card title={`Total Market Cap (${realCurrency})`} bordered={true}>
               <Title level={2}>
                 <CountUp
                   start={0}
-                  end={globalStats?.totalMarketCap}
+                  end={globalStats?.totalMarketCap * inRealCurrency}
                   duration={5}
                 />
               </Title>
             </Card>
           </Col>
           <Col xs={24} sm={12} lg={6}>
-            <Card title="Total 24H Volume (USD)" bordered={true}>
+            <Card title={`Total 24H Volume (${realCurrency})`} bordered={true}>
               <Title level={2}>
                 <CountUp
                   start={0}
-                  end={globalStats?.total24hVolume}
+                  end={globalStats?.total24hVolume * inRealCurrency}
                   duration={5}
                 />
               </Title>
@@ -75,14 +80,12 @@ const HomePage = () => {
 
       <div className="home-heading-container">
         <Title level={2} className="home-title">Top Crypto Currencies</Title>
-        <Title level={3} className="show-more"><Link to="/cryptocurrencies">Show More</Link></Title>
       </div>
 
       <CryptoCurrencies simplified/>
 
       <div className="home-heading-container">
         <Title level={2} className="home-title">Top latest Crypto Stories</Title>
-        <Title level={3} className="show-more"><Link to="/news">Show More</Link></Title>
       </div>
 
       <News simplified/>
