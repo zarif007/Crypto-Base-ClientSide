@@ -23,9 +23,6 @@ const CryptoCurrencies = ({simplified}) => {
 
   const { user } = useFireBase();
 
-  console.log('user', user)
-
-
   let columns = [
     {
       title: 'Logo',
@@ -77,8 +74,6 @@ const CryptoCurrencies = ({simplified}) => {
 
     setCryptos(filteredData);
   }, [cryptosList, searchTerm])
-
-  console.log(cryptos);
 
   if(isFetching) return <Spinner/>
 

@@ -4,7 +4,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import useFireBase from '../../../customHooks/useFireBase';
 import { useLocation, useHistory } from 'react-router-dom';
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
@@ -37,12 +37,12 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, values.email, values.password)
             .then(res => {
                 updateProfile(auth.currentUser, {displayName: values.username})
-                    .then(res => {})
-                history.push('');
-            })
+                    .then(res => {});
+                history.push('/login')
+            }) 
             .catch((error) => {
                 setError(error.message);
-            });
+            }) 
     };
 
     const onFinishFailed = (errorInfo) => {
