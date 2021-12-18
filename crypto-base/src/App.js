@@ -11,7 +11,7 @@ import Navbar from './Components/NavBar/NavBar';
 
 function App() {
   return (
-    <div>
+    <div style={{overflow: 'hidden'}}>
       <Router>
         <Navbar/>
         <div className="container">

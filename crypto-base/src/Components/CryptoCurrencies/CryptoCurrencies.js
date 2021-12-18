@@ -87,7 +87,7 @@ const CryptoCurrencies = ({simplified}) => {
         )
       }
       
-      <Card>
+      <Card style={{overflowX: 'scroll'}}>
         <Table 
           dataSource={cryptos}
           columns={columns}
