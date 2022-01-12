@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Menu, Typography, Avatar, Row, Col } from 'antd';
+import { Button, Menu, Typography, Avatar, Row, Col, Timeline } from 'antd';
 import { Link, Route, Switch } from 'react-router-dom';
-import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, FieldTimeOutlined, DollarOutlined } from '@ant-design/icons';
 import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
-import History from '../History/History';
 import OwnedCurrencies from '../OwnedCurrencies/OwnedCurrencies';
+import TimeLine from '../TimeLine/TimeLine';
 
 const DashboardNavBar = () => {
 
@@ -40,14 +40,11 @@ const DashboardNavBar = () => {
                     {activeMenu && (
                         <div style = {{height:"100vh"}}>
                             <Menu>
-                                <Menu.Item icon={<HomeOutlined />}>
-                                    <Link to={`${url}`}>History</Link>
+                                <Menu.Item icon={<FieldTimeOutlined />}>
+                                    <Link to={`${url}`}>TimeLine</Link>
                                 </Menu.Item>
-                                <Menu.Item icon={<FundOutlined />}>
-                                    <Link to={`${url}/ownedcurrencies`}>owned</Link>
-                                </Menu.Item>
-                                <Menu.Item icon={<FundOutlined />}>
-                                    <Link to={`${url}/ownedcurrencies`}>owned</Link>
+                                <Menu.Item icon={<DollarOutlined />}>
+                                    <Link to={`${url}/ownedcurrencies`}>Assets</Link>
                                 </Menu.Item>
                             </Menu>
                         </div>
@@ -58,7 +55,7 @@ const DashboardNavBar = () => {
                     <div>
                         <Switch>
                             <Route exact path={path}>
-                                <History />
+                                <TimeLine />
                             </Route>
                             <Route exact path={`${path}/ownedcurrencies`}>
                                 <OwnedCurrencies />

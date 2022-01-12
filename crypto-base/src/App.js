@@ -12,7 +12,7 @@ import LogIn from './Components/Authentication/LogIn/LogIn';
 import Register from './Components/Authentication/Register/Register';
 import DashboardNavBar from './Components/Dashboard/DashboardNavBar/DashboardNavBar';
 import OwnedCurrencies from './Components/Dashboard/OwnedCurrencies/OwnedCurrencies';
-import History from './Components/Dashboard/History/History';
+import History from './Components/Dashboard/TimeLine/TimeLine';
 
 
 function App() {
