@@ -10,6 +10,9 @@ import { NavBar, HomePage, Exchanges, CryptoCurrencies, CryptoDetails, News } fr
 import Navbar from './Components/NavBar/NavBar';
 import LogIn from './Components/Authentication/LogIn/LogIn';
 import Register from './Components/Authentication/Register/Register';
+import DashboardNavBar from './Components/Dashboard/DashboardNavBar/DashboardNavBar';
+import OwnedCurrencies from './Components/Dashboard/OwnedCurrencies/OwnedCurrencies';
+import History from './Components/Dashboard/History/History';
 
 
 function App() {
@@ -42,6 +45,14 @@ function App() {
             </Route>
           </Switch>
         </div>
+        <Switch>
+          <Route path='/dashboard'>
+            <DashboardNavBar />
+          </Route>
+          <Route path='/ownedcurrencies'>
+            <OwnedCurrencies />
+          </Route>
+        </Switch>
       </Router>
     </div>
   );

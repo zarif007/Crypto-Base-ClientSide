@@ -29,7 +29,7 @@ const Navbar = () => {
                 <Link to='/news' className='navbar__item'><h3>Stories</h3></Link>
                 {
                   user.displayName ? <>
-                    <Link to='/login' className='navbar__item'>{user.displayName}</Link>
+                    <Link to='/dashboard' className='navbar__item'><Button type="primary" className='navbar__item' style={{height: 40, marginRight: 3}}>DashBoard</Button></Link>
                     <Button type="primary" className='navbar__item' onClick={logOut} style={{height: 40, marginRight: 3}}>Log Out</Button>
                   </> : <>
                     <Link to='/login' className='navbar__item'><Button type="primary" style={{height: 40}}>Sign In</Button></Link>
