@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Menu, Typography, Avatar, Row, Col, Timeline } from 'antd';
 import { Link, Route, Switch } from 'react-router-dom';
-import { MenuOutlined, FieldTimeOutlined, DollarOutlined } from '@ant-design/icons';
+import { FieldTimeOutlined, DollarOutlined, LeftSquareOutlined, RightSquareOutlined } from '@ant-design/icons';
 import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
 import OwnedCurrencies from '../OwnedCurrencies/OwnedCurrencies';
 import TimeLine from '../TimeLine/TimeLine';
+import PrivateRoute from './../../Authentication/PrivateRoute/PrivateRoute';
 
 const DashboardNavBar = () => {
 
@@ -33,7 +34,7 @@ const DashboardNavBar = () => {
 
     return (
         <div>
-            <Button onClick={() => setActiveMenu(!activeMenu)}><MenuOutlined /></Button> <br />
+            <Button onClick={() => setActiveMenu(!activeMenu)}>{activeMenu ? <LeftSquareOutlined /> : <RightSquareOutlined />}</Button> <br />
             <Row>
                 
                 <Col span={activeMenu && 6}>
@@ -41,10 +42,10 @@ const DashboardNavBar = () => {
                         <div style = {{height:"100vh"}}>
                             <Menu>
                                 <Menu.Item icon={<FieldTimeOutlined />}>
-                                    <Link to={`${url}`}>TimeLine</Link>
+                                    <Link to={`${url}`}>Assests</Link>
                                 </Menu.Item>
                                 <Menu.Item icon={<DollarOutlined />}>
-                                    <Link to={`${url}/ownedcurrencies`}>Assets</Link>
+                                    <Link to={`${url}/timeline`}>TimeLine</Link>
                                 </Menu.Item>
                             </Menu>
                         </div>
@@ -54,12 +55,12 @@ const DashboardNavBar = () => {
                 <Col span={!activeMenu ? 24 : 18}>
                     <div>
                         <Switch>
-                            <Route exact path={path}>
-                                <TimeLine />
-                            </Route>
-                            <Route exact path={`${path}/ownedcurrencies`}>
+                            <PrivateRoute exact path={path}>
                                 <OwnedCurrencies />
-                            </Route>
+                            </PrivateRoute>
+                            <PrivateRoute exact path={`${path}/timeline`}>
+                                <TimeLine />
+                            </PrivateRoute>
                         </Switch>
                     </div>
                 </Col>

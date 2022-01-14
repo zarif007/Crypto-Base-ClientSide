@@ -1,25 +1,29 @@
-import { Layout } from 'antd';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import './App.css';
-import { NavBar, HomePage, Exchanges, CryptoCurrencies, CryptoDetails, News } from './Components'
-import Navbar from './Components/NavBar/NavBar';
-import LogIn from './Components/Authentication/LogIn/LogIn';
-import Register from './Components/Authentication/Register/Register';
-import DashboardNavBar from './Components/Dashboard/DashboardNavBar/DashboardNavBar';
-import OwnedCurrencies from './Components/Dashboard/OwnedCurrencies/OwnedCurrencies';
-import History from './Components/Dashboard/TimeLine/TimeLine';
+import { NavBar, 
+  HomePage, 
+  Exchanges, 
+  CryptoCurrencies, 
+  CryptoDetails, 
+  News, 
+  LogIn, 
+  Register, 
+  DashboardNavBar, 
+  TimeLine,
+} from './Components'
+
+import PrivateRoute from './Components/Authentication/PrivateRoute/PrivateRoute';
 
 
 function App() {
   return (
     <div style={{overflow: 'hidden'}}>
       <Router>
-        <Navbar/>
+        <NavBar />
         <div className="container">
           <Switch>
             <Route exact path='/'>
@@ -46,12 +50,12 @@ function App() {
           </Switch>
         </div>
         <Switch>
-          <Route path='/dashboard'>
+          <PrivateRoute path='/dashboard'>
             <DashboardNavBar />
-          </Route>
-          <Route path='/ownedcurrencies'>
-            <OwnedCurrencies />
-          </Route>
+          </PrivateRoute>
+          <PrivateRoute path='/timeline'>
+            <TimeLine />
+          </PrivateRoute>
         </Switch>
       </Router>
     </div>
