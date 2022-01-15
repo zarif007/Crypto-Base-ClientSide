@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import useFireBase from '../../../customHooks/useFireBase';
 import { useLocation, useHistory } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import axios from 'axios';
+import domain from '../../../Domain';
 
 const Register = () => {
 
@@ -22,6 +24,7 @@ const Register = () => {
         signInWithGoogle()
             .then(res => {
                 setUser(res.user);
+                saveToDB(res.user, 'PUT');
                 history.push(redirect_url);
             })
             .finally(() => setIsLoading(false))
@@ -33,11 +36,12 @@ const Register = () => {
             setError('Password did not match');
             return;
         }
-        
+
         createUserWithEmailAndPassword(auth, values.email, values.password)
             .then(res => {
                 updateProfile(auth.currentUser, {displayName: values.username})
                     .then(res => {});
+                saveToDB({email: values.email, displayName: values.username, uid: res.user.uid}, 'POST');
                 history.push('/login')
             }) 
             .catch((error) => {
@@ -49,6 +53,17 @@ const Register = () => {
         console.log('Failed:', errorInfo);
     };
 
+    const saveToDB = ({email, displayName, uid}, METHOD) => {
+        const user = {email, displayName, fireBaseId: uid};
+
+        if(METHOD === 'PUT'){
+            axios.put(`${domain}user`, user)
+                .then(res => {});
+        } else {
+            axios.post(`${domain}user`, user)
+                .then(res => {});
+        }
+    }
 
     return (
         <div style={{fontFamily: "'Inter', sans-serif"}}>

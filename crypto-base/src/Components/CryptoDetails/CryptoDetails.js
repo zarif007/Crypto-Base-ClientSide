@@ -153,7 +153,9 @@ const CryptoDetails = () => {
                   step="0.00001"
                   onChange={value => setAmmount(value)}
               />  <br/>
-              <Button type="primary" style={{marginTop: 20, height: 50, width: 300, fontSize: 20}}>BUY</Button>
+              <Button onClick={
+                () => console.log([cryptoDetails.name, cryptoDetails.iconUrl, cryptoDetails.slug], ammount, cryptoDetails.price * ammount)
+              } type="primary" style={{marginTop: 20, height: 50, width: 300, fontSize: 20}}>BUY</Button>
             </Card>
           </Col>
         </Col>

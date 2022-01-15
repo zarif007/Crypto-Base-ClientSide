@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import useFireBase from './../../../customHooks/useFireBase';
 import { useLocation, useHistory } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import axios from 'axios';
+import domain from './../../../Domain';
 
 
 const LogIn = () => {
@@ -23,6 +25,7 @@ const LogIn = () => {
         signInWithGoogle()
             .then(res => {
                 setUser(res.user);
+                saveToDB(res.user);
                 history.push(redirect_url);
             })
             .finally(() => setIsLoading(false))
@@ -43,6 +46,13 @@ const LogIn = () => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    const saveToDB = ({email, displayName, uid}) => {
+        const user = {email, displayName, fireBaseId: uid};
+
+        axios.put(`${domain}user`, user)
+            .then(res => console.log(res));
+    }
 
     return (
         <div style={{fontFamily: "'Inter', sans-serif"}}>
